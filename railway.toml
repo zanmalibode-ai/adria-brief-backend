@@ -1,12 +1,6 @@
-`index.js` je tam — "1 minute ago" ✅. Problem je `railway.toml` ki ima napačen start command. Klikni na `railway.toml` → ✏️ → zamenjaj vso vsebino z:
-
-```toml
 [build]
 builder = "nixpacks"
 
 [deploy]
 startCommand = "node index.js"
 healthcheckPath = "/health"
-```
-
-Klikni **Commit changes** → Railway redeployalo.
