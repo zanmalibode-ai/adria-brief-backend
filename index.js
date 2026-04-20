@@ -202,7 +202,7 @@ app.delete("/api/subscribers/:id", requireAdmin, async (req, res) => {
 
 app.get("/health", (_, res) => res.json({ ok: true, time: new Date().toISOString() }));
 
-cron.schedule("0 7 * * *", async () => {
+cron.schedule("15 4 * * *", async () => {
   console.log("⏰ Cron 07:00 — pošiljam brief...");
   try {
     const result = await sendBriefToAll();
@@ -215,3 +215,13 @@ cron.schedule("0 7 * * *", async () => {
 app.listen(PORT, () => {
   console.log(`🌊 Adria Brief running on port ${PORT}`);
 });
+
+cron.schedule("15 16 * * *", async () => {
+  console.log("⏰ Cron 18:15 — popoldanska posodobitev...");
+  try {
+    const result = await sendBriefToAll();
+    console.log(`✅ Cron: ${result.sent}/${result.total}`);
+  } catch (err) {
+    console.error("❌ Cron napaka:", err.message);
+  }
+}, { timezone: "Europe/Zagreb" });
